@@ -1,0 +1,131 @@
+## 参考文献
+
+[1] 崔正, 吴建姣, 吴琼. 基于互联网大数据的中药材信息综合服务平台建设研究[J]. 中国中医药信息杂志, 2016, 23(11): 8-12.
+
+[2] 董红永, 刘峥. 中药材供应链企业竞争策略研究[J]. 中国中药杂志, 2020, 45(12): 2856-2863.
+
+[3] 叶淞文, 王建军, 李华. 中药材电商物流发展现状与对策研究[J]. 中国中药杂志, 2018, 43(15): 3125-3132.
+
+[4] 赵翰林, 李思屹, 张藐丹. 中药材电商物流质量管理研究[J]. 物流技术, 2022, 41(8): 89-95.
+
+[5] 何燕. 数字经济背景下中药材企业转型升级研究[J]. 中国中药杂志, 2023, 48(6): 1456-1463.
+
+[6] Ou Y, Perng C. Building e-commerce clustering platform and innovative business model for traditional Chinese medicine industry[J]. Expert Systems with Applications, 2014, 41(10): 4714-4723.
+
+[7] Wengeng S. E-commerce model of traditional Chinese medicine based on strategic management perspective[J]. International Journal of Business Management, 2010, 5(7): 156-162.
+
+[8] Huang L. Application of e-commerce in China's mental health field: Infrastructure construction of medical products including traditional Chinese medicine[J]. Digital Health, 2017, 3: 1-8.
+
+[9] 李子强. 中药材线上仓单质押模式利益相关者演化博弈分析[J]. 中国中药杂志, 2018, 43(20): 4125-4132.
+
+[10] 李越峰, 边甜甜, 王明华. 中药质量控制与销售的电商模式构建研究[J]. 中国中药杂志, 2019, 44(16): 3456-3463.
+
+[11] 丁韩洁, 钟晓明, 黄真. 电商平台质量监管机制研究[J]. 管理科学, 2015, 28(4): 78-87.
+
+[12] Perng C. Quality improvement strategies for e-commerce platform sellers[J]. Electronic Commerce Research, 2014, 14(3): 245-268.
+
+[13] Wengeng S. Patent protection and counterfeit prevention in e-commerce[J]. International Journal of Electronic Commerce, 2010, 15(2): 89-106.
+
+[14] Chatterjee P. Online reviews: Do consumers use them?[J]. Advances in Consumer Research, 2001, 28(1): 129-133.
+
+[15] Mudambi SM. What makes a helpful online review? A study of customer reviews on Amazon.com[J]. MIS Quarterly, 2010, 34(1): 185-200.
+
+[16] 江莹, 王建华, 李明. 中药饮片网上销售监管问题研究[J]. 中国中药杂志, 2018, 43(12): 2456-2463.
+
+[17] 赵彤, 李华强, 王明. 医药电商评论对消费者购买意愿的影响研究[J]. 中国药房, 2017, 28(15): 2045-2050.
+
+[18] 魏奕星, 邓朝华. 基于对应分析的在线评论与中药材线上销售差异研究[J]. 中国中药杂志, 2018, 43(18): 3756-3763.
+
+[19] Fittler A, Vida RG, Káplár M, et al. Consumers turning to the internet pharmacy market: Cross-sectional study on the frequency and attitudes of Hungarian patients purchasing medications online[J]. Journal of Medical Internet Research, 2018, 20(8): e11115.
+
+[20] Popkov I, Nono A. Electronic word-of-mouth in prescription drug markets[J]. Journal of Medical Marketing, 2016, 16(3): 178-189.
+
+[21] Ersöz Y. The impact of online reviews on customer purchase intention: Evidence from Turkey[J]. International Journal of Electronic Commerce Studies, 2023, 14(1): 45-62.
+
+[22] Medhat W, Hassan A, Korashy H. Sentiment analysis algorithms and applications: A survey[J]. Ain Shams Engineering Journal, 2014, 5(4): 1093-1113.
+
+[23] Liu B, Zhang L. A survey of opinion mining and sentiment analysis[J]. Mining Text Data, 2020, 415-463.
+
+[24] Schouten K, Frasincar F. Survey on aspect-level sentiment analysis[J]. IEEE Transactions on Knowledge and Data Engineering, 2016, 28(3): 813-830.
+
+[25] 张军, 王丽. 基于机器学习的中文情感分析方法比较研究[J]. 计算机应用研究, 2022, 39(5): 1356-1365.
+
+[26] Christopher M. Logistics and supply chain management: Creating value-adding networks[M]. Pearson, 2016.
+
+[27] 李华, 王明. 电子商务环境下消费者评论分析方法研究[J]. 管理科学学报, 2021, 24(10): 156-167.
+
+[28] Baron RM, Kenny DA. The moderator-mediator variable distinction in social psychological research: Conceptual, strategic, and statistical considerations[J]. Journal of Personality and Social Psychology, 1986, 51(6): 1173-1182.
+
+[29] 张伟, 陈强. 中药材供应链质量管理研究进展[J]. 中国中药杂志, 2021, 46(22): 5856-5865.
+
+[30] Hu M, Liu B. Mining and summarizing customer reviews[C]//Proceedings of the tenth ACM SIGKDD international conference on Knowledge discovery and data mining, 2004: 168-177.
+
+[31] Devlin J, Chang MW, Lee K, et al. BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding[C]//Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, 2019: 4171-4186.
+
+[32] Vaswani A, Shazeer N, Parmar N, et al. Attention is All you Need[C]//Advances in Neural Information Processing Systems, 2017: 5998-6008.
+
+[33] Hochreiter S, Schmidhuber J. Long Short-Term Memory[J]. Neural Computation, 1997, 9(8): 1735-1780.
+
+[34] Kim Y. Convolutional Neural Networks for Sentence Classification[C]//Proceedings of the 2014 Conference on Empirical Methods in Natural Language Processing, 2014: 1746-1751.
+
+[35] Zhang L, Wang S, Liu B. Deep Learning for Sentiment Analysis: A Survey[J]. Wiley Interdisciplinary Reviews: Data Mining and Knowledge Discovery, 2018, 8(4): e1253.
+
+[36] Young T, Hazarika D, Poria S, et al. Recent Trends in Deep Learning Based Natural Language Processing[J]. IEEE Computational Intelligence Magazine, 2018, 13(3): 55-76.
+
+[37] Liu Y, Miao L, Zhai J, et al. Research on Supply Chain Management Based on Big Data and Artificial Intelligence[J]. Journal of Physics: Conference Series, 2021, 1748(6): 062058.
+
+[38] Gunasekaran A, Subramanian N, Papadopoulos T. Information Technology for Competitive Advantage within Logistics and Supply Chains: A Review[J]. Transportation Research Part E: Logistics and Transportation Review, 2017, 99: 14-33.
+
+[39] Wamba SF, Akter S, Edwards A, et al. How 'Big Data' Can Make Big Impact: Findings from a Systematic Review and a Longitudinal Case Study[J]. International Journal of Production Economics, 2015, 165: 234-246.
+
+[40] Chen DQ, Preston DS, Swink M. How the Use of Big Data Analytics Affects Value Creation in Supply Chain Management[J]. Journal of Management Information Systems, 2015, 32(4): 4-39.
+
+[41] Aljohani A. Predictive Analytics and Machine Learning for Real-Time Supply Chain Risk Mitigation and Agility[J]. Sustainability, 2023, 15(20): 15088.
+
+[42] Amellal I, Amellal A, Seghiouer H, et al. An integrated approach for modern supply chain management: Utilizing advanced machine learning models for sentiment analysis, demand forecasting, and probabilistic price prediction[J]. Decision Science Letters, 2024, 13(1): 237-248.
+
+[43] Jahin MA, Naife SA, Saha AK, et al. AI in Supply Chain Risk Assessment: A Systematic Literature Review and Bibliometric Analysis[J]. arXiv preprint arXiv:2401.10895, 2024.
+
+[44] Wong CY, Zhou X, Muda AK, et al. AI-driven supply chain risk management capability and its impact on supply chain agility: The mediating role of supply chain re-engineering capability[J]. Expert Systems with Applications, 2023, 211: 118604.
+
+[45] Schroeder R, Lodemann J. Machine Learning in Supply Chain Risk Management: A Systematic Literature Review[J]. Logistics, 2021, 5(4): 83.
+
+[46] Lee H, Shen M, Crandall JW, et al. Leveraging social media and blockchain for real-time supply chain visibility and risk management[J]. Decision Support Systems, 2021, 151: 113631.
+
+[47] Ganesh K, Kalpana B. A comprehensive review of artificial intelligence and machine learning techniques in supply chain risk management[J]. Uncertain Supply Chain Management, 2022, 10(1): 139-150.
+
+[48] Ivanov D, Dolgui A. A digital supply chain twin for managing the disruption risks and resilience in the era of Industry 4.0[J]. Production Planning & Control, 2021, 32(9): 775-788.
+
+[49] Li Y, Chen K, Collignon S, et al. Ripple effect in the supply chain network: Forward and backward disruption propagation, network health and firm vulnerability[J]. European Journal of Operational Research, 2021, 291(3): 1117-1131.
+
+[50] Tao F, Cheng J, Qi Q, et al. Digital twin-driven product design, manufacturing and service with big data[J]. The International Journal of Advanced Manufacturing Technology, 2018, 94(9): 3563-3576.
+
+[51] Chen Y, Wang J, Huang Z, et al. BERT for product reviews sentiment analysis using transfer learning model[J]. IEEE Access, 2022, 10: 35033-35043.
+
+[52] Liu G, Wang Y, Wu M, et al. BERT4Rec: Sequential Recommendation with Bidirectional Encoder Representations from Transformer[J]. IEEE Transactions on Knowledge and Data Engineering, 2022.
+
+[53] Yang Y, Deng X, Yan J, et al. A novel hybrid model for sentiment analysis based on deep learning and Glove word embedding[J]. Expert Systems with Applications, 2022, 205: 117574.
+
+[54] Sun C, Huang L, Qiu X. Utilizing BERT for aspect-based sentiment analysis via constructing auxiliary sentence[C]//Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, 2019: 380-385.
+
+[55] Wang Y, Huang M, Zhao L. Attention-based LSTM for aspect-level sentiment classification[C]//Proceedings of the 2016 conference on empirical methods in natural language processing, 2016: 606-615.
+
+[56] Al-Smadi M, Qawasmeh O, Al-Ayyoub M, et al. Deep recurrent neural network vs. support vector machine for aspect-based sentiment analysis of Arabic hotels' reviews[J]. Journal of Computational Science, 2018, 27: 386-393.
+
+[57] Xu H, Liu B, Shu L, et al. BERT post-training for review reading comprehension and aspect-based sentiment analysis[C]//Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, 2019: 2324-2335.
+
+[58] Kumar S, Kumar A, Singh S. LSTM with Self-attention for Aspect-based Sentiment Analysis of Restaurant Reviews[J]. IEEE Access, 2022, 10: 94870-94885.
+
+[59] Zaki E, Nasr M, Khedr AE. LSTM-GRU based technique for sentiment analysis of Arabic tweets[J]. Journal of King Saud University - Computer and Information Sciences, 2023, 35(3): 251-260.
+
+[60] Taboada M, Brooke J, Tofiloski M, et al. Lexicon-based methods for sentiment analysis[J]. Computational linguistics, 2011, 37(2): 267-307.
+
+[61] Liu B. Sentiment analysis and opinion mining[J]. Synthesis lectures on human language technologies, 2012, 5(1): 1-167.
+
+[62] Abdi A, Shamsuddin SM, Hasan S, et al. Deep learning-based sentiment classification of evaluative text based on Multi-feature fusion[J]. Information Processing & Management, 2019, 56(4): 1245-1259.
+
+[63] Yadav A, Vishwakarma DK. Sentiment analysis using deep learning architectures: a review[J]. Artificial Intelligence Review, 2020, 53(6): 4335-4385.
+
+[64] Zhang W, Xu H, Wan W. Weakness finder: Find product weakness from Chinese reviews by using aspects based sentiment analysis[J]. Expert Systems with Applications, 2012, 39(11): 10283-10291.
+
+[65] Siering M, Muntermann J, Rajagopalan B. Explaining and predicting online review helpfulness: The role of content and reviewer-related signals[J]. Decision Support Systems, 2018, 108: 1-12. 

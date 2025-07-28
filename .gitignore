@@ -1,1 +1,16 @@
 comments/
+
+__pycache__
+venv/
+.DS_Store
+
+# Exclude virtual environment
+venv/
+
+# Exclude large model files
+output/models/
+
+# Exclude large binary files
+*.dylib
+*.so
+*.safetensors

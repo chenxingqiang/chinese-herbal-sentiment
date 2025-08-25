@@ -76,6 +76,9 @@ target/
 # Jupyter Notebook
 .ipynb_checkpoints
 
+# Archive directory (contains thesis data and outputs)
+archive/
+
 # IPython
 profile_default/
 ipython_config.py

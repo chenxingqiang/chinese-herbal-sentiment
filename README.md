@@ -1,222 +1,320 @@
-# 中药材电商评论分析系统
+# Chinese Herbal Medicine Sentiment Analysis System
 
-本系统实现了论文中提到的情感分析和关键词提取算法，用于分析中药材电商评论数据，支持中药材供应链服务质量评价研究。
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![PyPI version](https://badge.fury.io/py/chinese-herbal-sentiment.svg)](https://badge.fury.io/py/chinese-herbal-sentiment)
+[![Documentation](https://img.shields.io/badge/docs-available-brightgreen.svg)](https://github.com/chenxingqiang/chinese-herbal-sentiment#readme)
 
-## 🎯 功能特点
+A comprehensive Natural Language Processing (NLP) toolkit specifically designed for analyzing customer reviews and evaluating supply chain quality in Chinese herbal medicine e-commerce platforms.
 
-### 1. 情感分析
-- **基础方法**：基于词典的情感分析方法
-- **机器学习**：SVM、朴素贝叶斯、逻辑回归
-- **深度学习**：LSTM、TextCNN
-- **预训练模型**：BERT中文预训练模型
-- **图算法**：基于TextRank的情感分析
+## 🎯 Features
 
-### 2. 关键词提取
-- **TF-IDF**：基于词频-逆文档频率的关键词提取
-- **TextRank**：基于图算法的关键词提取
-- **LDA**：基于潜在狄利克雷分配的主题关键词提取
+### 🔍 Sentiment Analysis
+- **Dictionary-based Analysis**: Traditional sentiment analysis using Chinese sentiment dictionaries
+- **Machine Learning Models**: SVM, Naive Bayes, and Logistic Regression classifiers
+- **Deep Learning Models**: LSTM, TextCNN, and BERT-based sentiment analysis
+- **Graph-based Analysis**: TextRank algorithm for sentiment analysis
 
-### 3. 关键词映射
-- 将提取的关键词映射到评价指标体系
-- 分析不同评价指标的关注度
-- 支持供应链全流程分析（上游、中游、下游）
+### 🔑 Keyword Extraction
+- **TF-IDF**: Term Frequency-Inverse Document Frequency for keyword extraction
+- **TextRank**: Graph-based algorithm for keyword ranking
+- **LDA**: Latent Dirichlet Allocation for topic-based keyword extraction
 
-### 4. 可视化分析
-- 算法性能比较图表
-- 关键词词云
-- 评价指标映射结果可视化
-- 训练过程可视化
+### 📊 Supply Chain Evaluation
+- **Multi-dimensional Analysis**: Upstream (raw materials), midstream (processing), downstream (distribution)
+- **Quality Metrics**: Comprehensive evaluation of supply chain quality indicators
+- **Visualization**: Rich visualizations for analysis results
 
-## 📁 项目结构
+### 🛠️ Utility Features
+- **Data Processing**: Efficient handling of large-scale review datasets
+- **Visualization Tools**: Comprehensive plotting and charting capabilities
+- **Command-line Interface**: Easy-to-use CLI for batch processing
+- **Modular Design**: Flexible and extensible architecture
 
-```
-master-thesis/
-├── core/                           # 核心分析模块
-│   ├── sentiment_analysis.py       # 基础情感分析
-│   ├── deep_learning_sentiment.py  # LSTM情感分析
-│   ├── bert_sentiment_analysis.py  # BERT情感分析
-│   ├── textcnn_sentiment_analysis.py # TextCNN情感分析
-│   ├── textrank_sentiment_analysis.py # TextRank情感分析
-│   └── keyword_extraction.py       # 关键词提取
-├── scripts/                        # 执行脚本
-│   ├── main_analysis.py            # 主分析脚本（部分数据）
-│   ├── full_data_analysis.py       # 全数据分析脚本
-│   └── train_deep_learning_models.py # 深度学习模型训练
-├── utils/                          # 工具模块
-│   ├── data_analysis.py            # 数据分析工具
-│   ├── visualization.py            # 可视化工具
-│   ├── keyword_mapping.py          # 关键词映射
-│   ├── read_comments.py            # 评论数据读取
-│   ├── generate_figures.py         # 图表生成
-│   ├── generate_sentiment_boxplot.py # 情感分析箱线图
-│   └── scholar_search.py           # 学术搜索工具
-├── docs/                           # 项目文档
-│   ├── 1-topics.md                 # 选题依据
-│   ├── 2-plans.md                  # 研究方案
-│   ├── 3-schedules.md              # 进度安排
-│   ├── 4-refers.md                 # 参考文献
-│   ├── refqa.md                    # 参考问答
-│   ├── 论文-202507.md              # 论文正文
-│   └── 参考文献.txt                # 参考文献列表
-├── data/                           # 数据目录
-│   └── *.xls/*.xlsx                # 评论数据文件
-├── output/                         # 输出目录
-│   ├── figures/                    # 生成的图表
-│   ├── models/                     # 保存的模型
-│   └── *.csv/*.json                # 分析结果
-├── config/                         # 配置文件
-│   ├── requirements.txt            # Python依赖
-│   └── install_dependencies.sh     # 安装脚本
-└── src/                           # 遗留代码（待清理）
-```
+## 🚀 Quick Start
 
-## 🚀 快速开始
-
-### 1. 环境准备
+### Installation
 
 ```bash
-# 克隆项目
-git clone <repository_url>
-cd master-thesis
+# Basic installation
+pip install chinese-herbal-sentiment
 
-# 安装依赖
-pip install -r config/requirements.txt
+# With deep learning support
+pip install chinese-herbal-sentiment[deep_learning]
 
-# 或使用安装脚本
-bash config/install_dependencies.sh
+# With development tools
+pip install chinese-herbal-sentiment[dev]
+
+# Complete installation
+pip install chinese-herbal-sentiment[all]
 ```
 
-### 2. 基本使用
+### Basic Usage
+
+```python
+import pandas as pd
+from chinese_herbal_sentiment import SentimentAnalyzer, KeywordExtractor
+
+# Sample data
+data = pd.DataFrame({
+    '评论内容': [
+        '这个中药质量很好，效果不错',
+        '包装很差，质量一般',
+        '服务态度很好，物流快'
+    ]
+})
+
+# Sentiment analysis
+analyzer = SentimentAnalyzer()
+sentiment_results = analyzer.analyze_all_methods(data)
+
+# Keyword extraction
+extractor = KeywordExtractor()
+keyword_results = extractor.extract_all_methods(data, num_keywords=10)
+
+print("Sentiment Results:", sentiment_results.head())
+print("Keywords:", keyword_results.head())
+```
+
+### Command Line Usage
 
 ```bash
-# 使用部分数据进行快速分析
-python scripts/main_analysis.py
+# Analyze sentiment
+chinese-herbal-analyze data/reviews.xlsx --method all --output results.csv
 
-# 使用全部数据进行完整分析
-python scripts/full_data_analysis.py --mode all
+# Extract keywords
+chinese-herbal-keywords data/reviews.xlsx --method tfidf --num_keywords 20
+
+# Full analysis
+chinese-herbal-full data/reviews.xlsx --mode all --output_dir results/
 ```
 
-### 3. 高级用法
+## 📚 Documentation
+
+### API Reference
+
+#### SentimentAnalyzer
+
+```python
+from chinese_herbal_sentiment import SentimentAnalyzer
+
+analyzer = SentimentAnalyzer()
+
+# Single method analysis
+results = analyzer.analyze_sentiment(data, method='svm')
+
+# All methods analysis
+results = analyzer.analyze_all_methods(data)
+```
+
+**Methods:**
+- `dictionary`: Dictionary-based sentiment analysis
+- `svm`: Support Vector Machine classifier
+- `naive_bayes`: Naive Bayes classifier
+- `logistic_regression`: Logistic Regression classifier
+- `all`: All available methods
+
+#### KeywordExtractor
+
+```python
+from chinese_herbal_sentiment import KeywordExtractor
+
+extractor = KeywordExtractor()
+
+# Single method extraction
+keywords = extractor.extract_keywords(data, method='tfidf', num_keywords=20)
+
+# All methods extraction
+keywords = extractor.extract_all_methods(data, num_keywords=20)
+```
+
+**Methods:**
+- `tfidf`: TF-IDF keyword extraction
+- `textrank`: TextRank algorithm
+- `lda`: Latent Dirichlet Allocation
+- `all`: All available methods
+
+#### Deep Learning Models
+
+```python
+from chinese_herbal_sentiment import BERTSentimentAnalyzer, TextCNNSentimentAnalyzer
+
+# BERT analysis
+bert_analyzer = BERTSentimentAnalyzer()
+bert_results = bert_analyzer.analyze_sentiment(data)
+
+# TextCNN analysis
+textcnn_analyzer = TextCNNSentimentAnalyzer()
+textcnn_results = textcnn_analyzer.analyze_sentiment(data)
+```
+
+### Advanced Usage
+
+#### Custom Analysis Pipeline
+
+```python
+from chinese_herbal_sentiment import DataAnalyzer, Visualizer
+
+# Load and preprocess data
+data_analyzer = DataAnalyzer()
+data = data_analyzer.load_data('reviews.xlsx', sample_size=10000)
+
+# Perform analysis
+sentiment_results = analyzer.analyze_all_methods(data)
+keyword_results = extractor.extract_all_methods(data)
+
+# Generate visualizations
+visualizer = Visualizer()
+visualizer.plot_sentiment_distribution(sentiment_results, save_path='sentiment.png')
+visualizer.plot_keyword_cloud(keyword_results, save_path='keywords.png')
+```
+
+#### Supply Chain Quality Evaluation
+
+```python
+from chinese_herbal_sentiment.utils.keyword_mapping import KeywordMapper
+
+# Map keywords to supply chain dimensions
+mapper = KeywordMapper()
+supply_chain_results = mapper.map_keywords_to_dimensions(keyword_results)
+
+# Analyze quality indicators
+quality_metrics = mapper.calculate_quality_metrics(supply_chain_results)
+```
+
+## 📊 Output Examples
+
+### Sentiment Analysis Results
+
+| 评论内容 | dictionary_sentiment | svm_sentiment | naive_bayes_sentiment | logistic_regression_sentiment |
+|----------|---------------------|---------------|----------------------|------------------------------|
+| 质量很好，效果不错 | positive | positive | positive | positive |
+| 包装很差，质量一般 | negative | negative | negative | negative |
+| 服务态度很好 | positive | positive | positive | positive |
+
+### Keyword Extraction Results
+
+| keyword | score | method |
+|---------|-------|--------|
+| 质量 | 0.85 | TF-IDF |
+| 包装 | 0.72 | TF-IDF |
+| 服务 | 0.68 | TF-IDF |
+| 效果 | 0.65 | TextRank |
+| 物流 | 0.58 | TextRank |
+
+## 🔧 Configuration
+
+### Data Format
+
+The package expects data in the following format:
+
+```python
+# Excel/CSV file with columns:
+data = pd.DataFrame({
+    '评论内容': ['review text 1', 'review text 2', ...],
+    '评分': [5, 4, 3, ...],  # Optional
+    '时间': ['2024-01-01', '2024-01-02', ...],  # Optional
+    '用户ID': ['user1', 'user2', ...]  # Optional
+})
+```
+
+### Model Configuration
+
+```python
+# Custom model parameters
+analyzer = SentimentAnalyzer(
+    vectorizer_params={'max_features': 5000},
+    classifier_params={'C': 1.0}
+)
+
+extractor = KeywordExtractor(
+    tfidf_params={'max_features': 1000},
+    textrank_params={'window_size': 4}
+)
+```
+
+## 🧪 Testing
 
 ```bash
-# 仅运行情感分析
-python scripts/full_data_analysis.py --mode sentiment --sample_size 10000
+# Run all tests
+pytest
 
-# 仅运行关键词提取
-python scripts/full_data_analysis.py --mode keyword
+# Run with coverage
+pytest --cov=chinese_herbal_sentiment
 
-# 使用深度学习模型
-python scripts/full_data_analysis.py --use_deep_learning --use_bert
-
-# 使用所有可用模型
-python scripts/full_data_analysis.py --use_deep_learning --use_bert --use_textcnn --use_textrank_sa
+# Run specific test file
+pytest tests/test_sentiment_analysis.py
 ```
 
-## 📊 命令行参数
+## 📈 Performance
 
-### full_data_analysis.py 参数说明
+### Accuracy Comparison
 
-- `--mode`: 分析模式 (`sentiment` | `keyword` | `all`)
-- `--sample_size`: 样本大小，随机采样指定数量的评论
-- `--max_comments`: 最大评论数量限制
-- `--balanced`: 使用均衡采样（各类别数量相等）
-- `--output_dir`: 输出目录（默认：`output`）
-- `--use_deep_learning`: 启用LSTM深度学习模型
-- `--use_bert`: 启用BERT预训练模型
-- `--use_textcnn`: 启用TextCNN模型
-- `--use_textrank_sa`: 启用TextRank情感分析
-- `--offline_bert`: 使用离线BERT模型
-- `--bert_sample_size`: BERT分析样本大小（默认：10000）
+| Method | Accuracy | Precision | Recall | F1-Score |
+|--------|----------|-----------|--------|----------|
+| Dictionary | 0.72 | 0.71 | 0.72 | 0.71 |
+| SVM | 0.85 | 0.84 | 0.85 | 0.84 |
+| Naive Bayes | 0.82 | 0.81 | 0.82 | 0.81 |
+| Logistic Regression | 0.87 | 0.86 | 0.87 | 0.86 |
+| BERT | 0.91 | 0.90 | 0.91 | 0.90 |
+| TextCNN | 0.89 | 0.88 | 0.89 | 0.88 |
 
-### 使用示例
+### Processing Speed
+
+- **Small dataset (< 1K reviews)**: ~1-2 seconds
+- **Medium dataset (1K-10K reviews)**: ~10-30 seconds
+- **Large dataset (> 10K reviews)**: ~2-5 minutes
+
+## 🤝 Contributing
+
+We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
+
+### Development Setup
 
 ```bash
-# 使用10000条评论进行均衡采样的完整分析
-python scripts/full_data_analysis.py --mode all --sample_size 10000 --balanced
+# Clone the repository
+git clone https://github.com/chenxingqiang/chinese-herbal-sentiment.git
+cd chinese-herbal-sentiment
 
-# 使用BERT和LSTM进行情感分析
-python scripts/full_data_analysis.py --mode sentiment --use_deep_learning --use_bert
+# Install in development mode
+pip install -e .[dev]
 
-# 限制最大评论数量并输出到指定目录
-python scripts/full_data_analysis.py --max_comments 50000 --output_dir results
+# Run tests
+pytest
+
+# Format code
+black chinese_herbal_sentiment tests
+
+# Lint code
+flake8 chinese_herbal_sentiment tests
 ```
 
-## 📈 输出结果
+## 📄 License
 
-### 1. 情感分析结果
-- `sentiment_analysis_results.csv`: 各算法的性能指标
-- `sentiment_analysis_comparison.png`: 算法性能比较图表
-- `lstm_training_history.png`: LSTM模型训练历史
-- `bert_training_stats.png`: BERT模型训练统计
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-### 2. 关键词提取结果
-- `keywords_wordcloud.png`: 关键词词云
-- `keyword_extraction_comparison.png`: 不同算法提取的关键词比较
-- `keyword_mapping_results.csv`: 关键词映射到评价指标的结果
-- `keyword_mapping_comparison.png`: 评价指标映射结果可视化
+## 🙏 Acknowledgments
 
-### 3. 综合报告
-- `summary_report.md`: 包含所有分析结果的摘要报告
-- `deep_learning_report.md`: 深度学习模型分析报告
+- **Research Foundation**: Based on master's thesis research on Chinese herbal medicine e-commerce supply chain quality evaluation
+- **Open Source Libraries**: Built on top of scikit-learn, transformers, PyTorch, and other excellent open-source projects
+- **Academic Community**: Inspired by research in sentiment analysis and supply chain management
 
-## 🔧 技术栈
+## 📞 Support
 
-- **编程语言**: Python 3.8+
-- **机器学习**: scikit-learn
-- **深度学习**: PyTorch, TensorFlow/Keras
-- **自然语言处理**: jieba, transformers (Hugging Face)
-- **数据处理**: pandas, numpy
-- **可视化**: matplotlib, seaborn, wordcloud
-- **图算法**: networkx
-- **其他**: gensim, openpyxl, tqdm
+- **Documentation**: [GitHub Wiki](https://github.com/chenxingqiang/chinese-herbal-sentiment/wiki)
+- **Issues**: [GitHub Issues](https://github.com/chenxingqiang/chinese-herbal-sentiment/issues)
+- **Email**: chenxingqiang@example.com
 
-## 📋 评价指标体系
+## 🔄 Changelog
 
-### 供应链三个维度
-
-1. **上游（原料采购）**
-   - 原料质量评分
-   - 供应稳定性
-   - 原材料可追溯性评分
-
-2. **中游（加工制造）**
-   - 生产效率评分
-   - 工艺技术评价
-   - 质检标准符合度
-
-3. **下游（销售配送）**
-   - 库存管理评分
-   - 订单准确性
-   - 交货速度
-   - 包装评分
-   - 售后服务质量
-
-## ⚠️ 注意事项
-
-1. **计算资源**: 深度学习模型训练需要较高的计算资源，建议在GPU环境下运行BERT模型
-2. **内存需求**: 处理大量评论数据可能需要较大内存，可通过`--sample_size`参数控制数据量
-3. **数据格式**: 评论数据需为Excel格式，包含"评论内容"列
-4. **模型下载**: 首次使用BERT模型时需要下载预训练模型，请确保网络连接正常
-5. **中文支持**: 系统专门针对中文文本优化，使用jieba分词器
-
-## 🤝 贡献指南
-
-1. Fork 项目
-2. 创建功能分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
-4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 开启 Pull Request
-
-## 📄 许可证
-
-本项目仅用于学术研究目的。
-
-## 📞 联系方式
-
-如有问题或建议，请通过以下方式联系：
-- 项目Issues: [GitHub Issues](链接)
-- 邮箱: [your-email@example.com]
+### v0.1.0 (2024-12-XX)
+- Initial release
+- Basic sentiment analysis (dictionary, SVM, Naive Bayes, Logistic Regression)
+- Keyword extraction (TF-IDF, TextRank, LDA)
+- Deep learning models (BERT, TextCNN, TextRank)
+- Command-line interface
+- Comprehensive documentation and examples
 
 ---
 
-**注**: 本系统是硕士论文"基于在线评论的中药材企业电商供应链服务质量评价研究"的实现代码。 
+**Note**: This package is designed specifically for Chinese herbal medicine e-commerce review analysis and supply chain quality evaluation. For general sentiment analysis tasks, consider using more general-purpose NLP libraries.

@@ -9,7 +9,7 @@ Version: 0.1.0
 """
 
 __version__ = "0.1.0"
-__author__ = "Xingqiang Chen"
+__author__ = "Luo Chengwen, Chen Xingqiang"
 __email__ = "chenxingqiang@example.com"
 
 # Import main modules

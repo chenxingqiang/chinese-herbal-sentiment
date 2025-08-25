@@ -9,10 +9,12 @@ description = "Chinese Herbal Medicine E-commerce Sentiment Analysis System"
 readme = "README.md"
 license = {text = "MIT"}
 authors = [
-    {name = "Xingqiang Chen", email = "chenxingqiang@example.com"}
+    {name = "Luo Chengwen", email = "luochengwen@example.com"},
+    {name = "Chen Xingqiang", email = "chenxingqiang@example.com"}
 ]
 maintainers = [
-    {name = "Xingqiang Chen", email = "chenxingqiang@example.com"}
+    {name = "Luo Chengwen", email = "luochengwen@example.com"},
+    {name = "Chen Xingqiang", email = "chenxingqiang@example.com"}
 ]
 keywords = [
     "sentiment-analysis",

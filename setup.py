@@ -21,7 +21,7 @@ setup(
     description="Chinese Herbal Medicine E-commerce Sentiment Analysis System",
     long_description=read_readme(),
     long_description_content_type="text/markdown",
-    author="Xingqiang Chen",
+    author="Luo Chengwen, Chen Xingqiang",
     author_email="chenxingqiang@example.com",
     url="https://github.com/chenxingqiang/chinese-herbal-sentiment",
     packages=find_packages(),

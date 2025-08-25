@@ -5,9 +5,21 @@ include requirements-dev.txt
 include pyproject.toml
 include setup.py
 
-# Include package data
-recursive-include chinese_herbal_sentiment/models *
-recursive-include chinese_herbal_sentiment/data *
+# Include package data (excluding large model files)
+recursive-include chinese_herbal_sentiment/core *
+recursive-include chinese_herbal_sentiment/utils *
+
+# Exclude large model files for PyPI publication
+global-exclude chinese_herbal_sentiment/models/bert_sentiment_model/*.safetensors
+global-exclude chinese_herbal_sentiment/models/bert_sentiment_model/*.bin
+global-exclude chinese_herbal_sentiment/models/bert_sentiment_model/*.pt
+global-exclude chinese_herbal_sentiment/models/bert_sentiment_model/*.pth
+
+# Include only model configuration files
+include chinese_herbal_sentiment/models/bert_sentiment_model/config.json
+include chinese_herbal_sentiment/models/bert_sentiment_model/tokenizer_config.json
+include chinese_herbal_sentiment/models/bert_sentiment_model/special_tokens_map.json
+include chinese_herbal_sentiment/models/bert_sentiment_model/vocab.txt
 
 # Include documentation
 recursive-include docs *.md

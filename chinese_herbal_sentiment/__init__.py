@@ -4,13 +4,13 @@ Chinese Herbal Medicine E-commerce Sentiment Analysis System
 A comprehensive NLP toolkit for analyzing customer reviews and evaluating 
 supply chain quality in Chinese herbal medicine e-commerce.
 
-Author: Xingqiang Chen
+Author: Luo Chengwen, Chen Xingqiang
 Version: 0.1.0
 """
 
 __version__ = "0.1.0"
 __author__ = "Luo Chengwen, Chen Xingqiang"
-__email__ = "chenxingqiang@example.com"
+__email__ = "chenxingqiang@turingai.cc"
 
 # Import main modules
 from .core.sentiment_analysis import SentimentAnalyzer

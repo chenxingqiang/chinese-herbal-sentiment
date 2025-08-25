@@ -1,0 +1,50 @@
+include README.md
+include LICENSE
+include requirements.txt
+include requirements-dev.txt
+include pyproject.toml
+include setup.py
+
+# Include package data
+recursive-include chinese_herbal_sentiment/models *
+recursive-include chinese_herbal_sentiment/data *
+
+# Include documentation
+recursive-include docs *.md
+recursive-include docs *.txt
+recursive-include docs *.rst
+
+# Include examples
+recursive-include examples *.py
+recursive-include examples *.md
+recursive-include examples/sample_data *
+
+# Include tests
+recursive-include tests *.py
+recursive-include tests *.md
+
+# Include configuration files
+include .gitignore
+include .flake8
+include tox.ini
+
+# Exclude unnecessary files
+global-exclude *.pyc
+global-exclude *.pyo
+global-exclude *.pyd
+global-exclude __pycache__
+global-exclude .DS_Store
+global-exclude .git*
+global-exclude .svn*
+global-exclude .hg*
+global-exclude .bzr*
+global-exclude *.egg-info
+global-exclude .eggs
+global-exclude build
+global-exclude dist
+global-exclude .tox
+global-exclude .venv
+global-exclude venv
+global-exclude .env
+global-exclude .mypy_cache
+global-exclude .pytest_cache

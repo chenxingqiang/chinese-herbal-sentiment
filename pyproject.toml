@@ -9,11 +9,11 @@ description = "Chinese Herbal Medicine E-commerce Sentiment Analysis System"
 readme = "README.md"
 license = {text = "MIT"}
 authors = [
-    {name = "Luo Chengwen", email = "luochengwen@turingai.cc"},
+    {name = "Luo Jiawen", email = "luojiawen@turingai.cc"},
     {name = "Chen Xingqiang", email = "chenxingqiang@turingai.cc"}
 ]
 maintainers = [
-    {name = "Luo Chengwen", email = "luochengwen@turingai.cc"},
+    {name = "Luo Chengwen", email = "luojiawen@turingai.cc"},
     {name = "Chen Xingqiang", email = "chenxingqiang@turingai.cc"}
 ]
 keywords = [

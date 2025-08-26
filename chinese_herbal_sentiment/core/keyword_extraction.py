@@ -17,9 +17,25 @@ import matplotlib.pyplot as plt
 from collections import Counter
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import LatentDirichletAllocation
-from gensim import corpora, models
+# Optional gensim import
+try:
+    from gensim import corpora, models
+    GENSIM_AVAILABLE = True
+except ImportError:
+    print("Warning: gensim not available. LDA topic modeling will be disabled.")
+    GENSIM_AVAILABLE = False
+    corpora = None
+    models = None
 import networkx as nx
-from wordcloud import WordCloud
+
+# Optional wordcloud import
+try:
+    from wordcloud import WordCloud
+    WORDCLOUD_AVAILABLE = True
+except ImportError:
+    print("Warning: wordcloud not available. Word cloud generation will be disabled.")
+    WORDCLOUD_AVAILABLE = False
+    WordCloud = None
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -129,6 +145,10 @@ class KeywordExtraction:
 
     def lda_extraction(self, texts, num_topics=5, top_k=10):
         """基于LDA的关键词提取"""
+        if not GENSIM_AVAILABLE:
+            print("Warning: gensim not available. Skipping LDA extraction.")
+            return []
+            
         # 预处理文本
         preprocessed_texts = [self.preprocess(text) for text in texts]
 
@@ -223,36 +243,36 @@ class KeywordExtraction:
     def extract_keywords_with_data(self, comments, labels):
         """从直接传入的评论数据中提取关键词"""
         print(f"使用直接传入的 {len(comments)} 条评论进行关键词提取")
-        
+
         # 限制评论数量，以加快处理速度
         if len(comments) > 1000:
             indices = np.random.choice(len(comments), 1000, replace=False)
             comments = [comments[i] for i in indices]
             print(f"为加快处理速度，使用随机采样的1000条评论")
-        
+
         # 使用TF-IDF提取关键词
         print("\n使用TF-IDF提取关键词...")
         tfidf_keywords = self.tfidf_extraction(comments, 10)
-        
+
         # 使用TextRank提取关键词
         print("使用TextRank提取关键词...")
         textrank_keywords = self.textrank_extraction(comments, 10)
-        
+
         # 使用LDA提取关键词
         print("使用LDA提取关键词...")
         lda_keywords, lda_topics = self.lda_extraction(comments, num_topics=5, top_k=10)
-        
+
         # 统计所有关键词
         all_keywords = []
         for keywords in tfidf_keywords:
             all_keywords.extend([word for word, _ in keywords])
-        
+
         # 生成词云
         self.generate_wordcloud(all_keywords)
-        
+
         # 可视化关键词提取结果
         self.visualize_keywords(tfidf_keywords, textrank_keywords, lda_topics)
-        
+
         return {
             'tfidf': tfidf_keywords,
             'textrank': textrank_keywords,
@@ -262,6 +282,10 @@ class KeywordExtraction:
 
     def generate_wordcloud(self, keywords):
         """生成词云"""
+        if not WORDCLOUD_AVAILABLE:
+            print("Warning: wordcloud not available. Skipping word cloud generation.")
+            return
+            
         # 统计关键词频率
         keyword_counts = Counter(keywords)
 
@@ -274,7 +298,7 @@ class KeywordExtraction:
                 '/Users/xingqiangchen/Library/Fonts/Alibaba Sans Bold.OTF',
                 '/System/Library/Fonts/PingFang.ttc'  # 备选系统字体
             ]
-            
+
             # 查找第一个存在的字体
             font_path = None
             for font in alibaba_fonts:
@@ -282,10 +306,10 @@ class KeywordExtraction:
                     font_path = font
                     print(f"使用字体: {font}")
                     break
-            
+
             if not font_path:
                 print("未找到可用字体，使用默认字体")
-                
+
             # 创建词云
             wordcloud = WordCloud(
                 font_path=font_path,  # 使用找到的字体
@@ -295,10 +319,10 @@ class KeywordExtraction:
                 max_words=100,
                 collocations=False  # 避免重复词组
             )
-    
+
             # 生成词云
             wordcloud.generate_from_frequencies(keyword_counts)
-    
+
             # 保存词云图
             plt.figure(figsize=(10, 5))
             plt.imshow(wordcloud, interpolation='bilinear')
@@ -306,7 +330,7 @@ class KeywordExtraction:
             plt.tight_layout()
             plt.savefig('keywords_wordcloud.png')
             plt.close()
-            
+
             print("词云图生成成功：keywords_wordcloud.png")
         except Exception as e:
             print(f"词云图生成失败: {e}")

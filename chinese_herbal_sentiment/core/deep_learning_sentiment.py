@@ -15,13 +15,31 @@ import re
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, classification_report
-import tensorflow as tf
-from tensorflow.keras.preprocessing.text import Tokenizer
-from tensorflow.keras.preprocessing.sequence import pad_sequences
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Embedding, LSTM, Dense, Dropout, Bidirectional
+# Optional TensorFlow imports with error handling
+try:
+    import tensorflow as tf
+    from tensorflow.keras.preprocessing.text import Tokenizer
+    from tensorflow.keras.preprocessing.sequence import pad_sequences
+    from tensorflow.keras.models import Sequential
+    from tensorflow.keras.layers import Embedding, LSTM, Dense, Dropout, Bidirectional
+    TF_AVAILABLE = True
+except ImportError:
+    print("Warning: TensorFlow not available. Deep learning features will be disabled.")
+    TF_AVAILABLE = False
+    tf = None
+    Tokenizer = None
+    pad_sequences = None
+    Sequential = None
+    Embedding = LSTM = Dense = Dropout = Bidirectional = None
+
 import warnings
 warnings.filterwarnings('ignore')
+
+# 导入新的数据集加载器
+try:
+    from ..utils.dataset_loader import load_chinese_herbal_dataset
+except ImportError:
+    from chinese_herbal_sentiment.utils.dataset_loader import load_chinese_herbal_dataset
 
 # 设置中文显示
 plt.rcParams['font.sans-serif'] = ['Arial Unicode MS']  # 用于显示中文标签
@@ -29,6 +47,8 @@ plt.rcParams['axes.unicode_minus'] = False  # 用于正常显示负号
 
 class DeepLearningSentiment:
     def __init__(self):
+        if not TF_AVAILABLE:
+            raise ImportError("TensorFlow is required for DeepLearningSentiment. Please install: pip install tensorflow")
         # 加载停用词
         self.stopwords = self.load_stopwords()
         # 初始化jieba分词
@@ -343,6 +363,43 @@ class DeepLearningSentiment:
         self.visualize_training_history(history)
         
         return results
+    
+    def analyze_comments_from_huggingface(self, 
+                                         dataset_name="xingqiang/chinese-herbal-medicine-sentiment",
+                                         sample_size=None,
+                                         cache_dir=None):
+        """从Hugging Face数据集分析评论数据"""
+        print(f"从Hugging Face数据集加载LSTM训练数据: {dataset_name}")
+        
+        try:
+            # 加载数据集
+            loader = load_chinese_herbal_dataset(dataset_name, cache_dir)
+            
+            # 获取训练数据
+            comments, labels = loader.get_data_for_analysis(
+                split='train',
+                sample_size=sample_size,
+                balance_classes=True
+            )
+            
+            print(f"成功加载 {len(comments)} 条评论数据用于LSTM训练")
+            
+            # 打印数据分布信息
+            unique_labels, counts = np.unique(labels, return_counts=True)
+            print("数据分布:")
+            for label, count in zip(unique_labels, counts):
+                sentiment_name = "正面" if label == 1 else ("负面" if label == -1 else "中性")
+                percentage = count / len(labels) * 100
+                print(f"  {sentiment_name}: {count} 条 ({percentage:.1f}%)")
+            
+            # 使用现有的分析方法
+            return self.analyze_comments_with_data(comments, labels)
+            
+        except Exception as e:
+            print(f"❌ 从Hugging Face加载LSTM数据失败: {str(e)}")
+            print("回退到本地文件分析...")
+            # 回退到原有的文件分析方法
+            return self.analyze_comments([], max_comments=sample_size or 80000)
 
 def main():
     # 创建深度学习情感分析对象

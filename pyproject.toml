@@ -13,7 +13,7 @@ authors = [
     {name = "Chen Xingqiang", email = "chenxingqiang@turingai.cc"}
 ]
 maintainers = [
-    {name = "Luo Chengwen", email = "luojiawen@turingai.cc"},
+    {name = "Luo Jiawen", email = "luojiawen@turingai.cc"},
     {name = "Chen Xingqiang", email = "chenxingqiang@turingai.cc"}
 ]
 keywords = [
@@ -62,7 +62,6 @@ dependencies = [
 [project.optional-dependencies]
 deep_learning = [
     "torch>=1.9.0",
-    "tensorflow>=2.6.0",
     "transformers>=4.11.0",
     "keras>=2.6.0",
 ]

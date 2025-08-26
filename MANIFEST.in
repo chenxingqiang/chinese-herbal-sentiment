@@ -1,62 +1,47 @@
+# Include documentation and configuration files
 include README.md
 include LICENSE
-include requirements.txt
-include requirements-dev.txt
+include MANIFEST.in
 include pyproject.toml
-include setup.py
+include requirements*.txt
+include PYPI_RELEASE.md
 
-# Include package data (excluding large model files)
-recursive-include chinese_herbal_sentiment/core *
-recursive-include chinese_herbal_sentiment/utils *
+# Include documentation files
+recursive-include docs *
+recursive-include examples *.py *.md
+recursive-include scripts *.py
 
-# Exclude large model files for PyPI publication
-global-exclude chinese_herbal_sentiment/models/bert_sentiment_model/*.safetensors
-global-exclude chinese_herbal_sentiment/models/bert_sentiment_model/*.bin
-global-exclude chinese_herbal_sentiment/models/bert_sentiment_model/*.pt
-global-exclude chinese_herbal_sentiment/models/bert_sentiment_model/*.pth
-
-# Include only model configuration files
-include chinese_herbal_sentiment/models/bert_sentiment_model/config.json
-include chinese_herbal_sentiment/models/bert_sentiment_model/tokenizer_config.json
-include chinese_herbal_sentiment/models/bert_sentiment_model/special_tokens_map.json
-include chinese_herbal_sentiment/models/bert_sentiment_model/vocab.txt
-
-# Include documentation
-recursive-include docs *.md
-recursive-include docs *.txt
-recursive-include docs *.rst
-
-# Include examples
-recursive-include examples *.py
-recursive-include examples *.md
-recursive-include examples/sample_data *
-
-# Include tests
+# Include test files
 recursive-include tests *.py
-recursive-include tests *.md
 
-# Include configuration files
-include .gitignore
-include .flake8
-include tox.ini
+# Include package data
+recursive-include chinese_herbal_sentiment *.py
+recursive-include chinese_herbal_sentiment/models *
+recursive-include chinese_herbal_sentiment/api *.py
+recursive-include chinese_herbal_sentiment/core *.py
+recursive-include chinese_herbal_sentiment/utils *.py
+recursive-include chinese_herbal_sentiment/examples *.py
 
 # Exclude unnecessary files
 global-exclude *.pyc
 global-exclude *.pyo
 global-exclude *.pyd
 global-exclude __pycache__
-global-exclude .DS_Store
 global-exclude .git*
-global-exclude .svn*
-global-exclude .hg*
-global-exclude .bzr*
-global-exclude *.egg-info
-global-exclude .eggs
-global-exclude build
-global-exclude dist
-global-exclude .tox
-global-exclude .venv
-global-exclude venv
-global-exclude .env
-global-exclude .mypy_cache
+global-exclude .DS_Store
+global-exclude *.so
+global-exclude .coverage
 global-exclude .pytest_cache
+
+# Exclude development and build files
+exclude .gitignore
+exclude .pre-commit-config.yaml
+exclude tox.ini
+exclude Makefile
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]
+recursive-exclude archive *
+recursive-exclude output *
+recursive-exclude logs *
+recursive-exclude dist *
+recursive-exclude build *

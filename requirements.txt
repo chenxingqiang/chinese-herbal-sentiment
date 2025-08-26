@@ -12,8 +12,33 @@ tqdm>=4.62.0
 gensim>=4.0.0
 xlrd>=2.0.0
 
-# Optional: Deep Learning dependencies (uncomment if needed)
-# torch>=1.9.0
-# tensorflow>=2.6.0
-# transformers>=4.11.0
-# keras>=2.6.0
+# Statistical analysis
+scipy>=1.7.0
+
+# Time series analysis (optional but recommended)
+statsmodels>=0.13.0
+
+# Prophet for time series forecasting (optional)
+prophet>=1.1.0
+
+# Hugging Face integration
+datasets>=2.0.0
+huggingface_hub>=0.10.0
+
+# API framework (optional)
+fastapi>=0.68.0
+uvicorn>=0.15.0
+python-multipart>=0.0.5
+
+# Testing
+pytest>=6.0.0
+pytest-asyncio>=0.18.0
+
+# Deep learning dependencies (optional)
+# Install these if you want to use deep learning features:
+# pip install torch>=1.10.0
+# pip install transformers>=4.20.0  
+# pip install tensorflow>=2.8.0
+
+# BERT/Transformers (optional)
+transformers>=4.20.0

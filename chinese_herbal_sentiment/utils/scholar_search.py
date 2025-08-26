@@ -17,22 +17,22 @@ SERPAPI_KEY = "ccb455bf2b78995c16bd150d248334ea8051214c1c76ce58f7582bc975638ee4"
 def search_google_scholar(query, num_results=5, start=0, max_retries=5):
     """
     Search Google Scholar using SerpAPI with enhanced error handling and retries
-    
+
     Args:
         query (str): The search query
         num_results (int): Number of results to return
         start (int): Starting result index (for pagination)
         max_retries (int): Maximum number of retry attempts
-        
+
     Returns:
         list: List of paper dictionaries or empty list if no results/error occurs
     """
     # Encode the query for URL
     encoded_query = quote(query)
-    
+
     # SerpAPI endpoint
     url = f"https://serpapi.com/search.json?engine=google_scholar&q={encoded_query}&api_key={SERPAPI_KEY}&num={min(num_results, 20)}&start={start}"
-    
+
     # Set up headers with a random user agent
     user_agents = [
         'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
@@ -41,11 +41,11 @@ def search_google_scholar(query, num_results=5, start=0, max_retries=5):
         'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36',
         'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36 Edg/91.0.864.59'
     ]
-    
+
     # Initialize variables for retry logic
     retry_count = 0
     base_delay = 5  # Start with 5 seconds delay
-    
+
     while retry_count < max_retries:
         # Add a small random delay between all requests
         time.sleep(random.uniform(2.0, 5.0))
@@ -58,11 +58,11 @@ def search_google_scholar(query, num_results=5, start=0, max_retries=5):
             'Connection': 'keep-alive',
             'Upgrade-Insecure-Requests': '1',
         }
-        
+
         try:
             # Make the request with a generous timeout
             response = requests.get(url, headers=headers, timeout=60)
-            
+
             # Check for rate limiting
             if response.status_code == 429:
                 retry_after = int(response.headers.get('Retry-After', 60))
@@ -70,9 +70,9 @@ def search_google_scholar(query, num_results=5, start=0, max_retries=5):
                 time.sleep(retry_after)
                 retry_count += 1
                 continue
-                
+
             response.raise_for_status()
-            
+
             # Try to parse JSON
             try:
                 data = response.json()
@@ -84,7 +84,7 @@ def search_google_scholar(query, num_results=5, start=0, max_retries=5):
                 delay = base_delay * (2 ** retry_count)
                 time.sleep(delay * random.uniform(0.8, 1.2))
                 continue
-            
+
             # Check for API errors
             if 'error' in data:
                 print(f"  API error for query '{query}': {data.get('error', 'Unknown error')}")
@@ -92,14 +92,14 @@ def search_google_scholar(query, num_results=5, start=0, max_retries=5):
                 delay = base_delay * (2 ** retry_count)
                 time.sleep(delay * random.uniform(0.8, 1.2))
                 continue
-            
+
             # Check if there are organic results
             if 'organic_results' in data and data['organic_results']:
                 return data['organic_results']
             else:
                 print(f"  No results found for query: {query}")
                 return []
-                
+
         except requests.exceptions.RequestException as e:
             print(f"  Request error for query '{query}': {str(e)}")
             retry_count += 1
@@ -108,7 +108,7 @@ def search_google_scholar(query, num_results=5, start=0, max_retries=5):
                 print(f"  Waiting {delay:.1f} seconds before retry...")
                 time.sleep(delay * random.uniform(0.8, 1.2))
             continue
-    
+
     # If we've exhausted all retries
     print(f"  Failed to fetch results for query: {query} after {max_retries} attempts")
     return []
@@ -126,7 +126,7 @@ def format_reference(paper):
     title = paper.get('title', 'No Title')
     authors = ', '.join([author['name'] for author in paper.get('publication_info', {}).get('authors', [])])
     publication = paper.get('publication_info', {}).get('summary', 'No publication info')
-    
+
     return f"{authors}. **{title}**. *{publication}*."
 
 def analyze_relevance(paper, keywords):
@@ -142,10 +142,10 @@ def analyze_relevance(paper, keywords):
     """
     score = 0
     matched_keywords = []
-    
+
     title = paper.get('title', '').lower()
     snippet = paper.get('snippet', '').lower()
-    
+
     # Check for keywords in title and snippet
     for keyword, weight in keywords:
         # Use regex for whole-word matching
@@ -155,7 +155,7 @@ def analyze_relevance(paper, keywords):
         elif re.search(r'\b' + re.escape(keyword.lower()) + r'\b', snippet):
             score += weight
             matched_keywords.append(keyword)
-            
+
     return score, list(set(matched_keywords))
 
 def save_to_markdown(content, filename):
@@ -183,28 +183,28 @@ def get_tcm_supply_chain_keywords():
     """
     return [
         # Quality Evaluation
-        ("quality evaluation", 10), ("quality control", 9), ("quality standard", 8), 
-        ("authenticity identification", 7), ("heavy metal", 6), ("pesticide residue", 6), 
+        ("quality evaluation", 10), ("quality control", 9), ("quality standard", 8),
+        ("authenticity identification", 7), ("heavy metal", 6), ("pesticide residue", 6),
         ("active ingredient", 8), ("chemical fingerprint", 7), ("good agricultural practices", 5),
         # Processing
-        ("processing technology", 9), ("decoction pieces", 7), ("extraction process", 8), 
-        ("good manufacturing practice", 8), ("GMP", 8), ("production management", 7), 
+        ("processing technology", 9), ("decoction pieces", 7), ("extraction process", 8),
+        ("good manufacturing practice", 8), ("GMP", 8), ("production management", 7),
         ("quality assurance", 8),
         # Logistics & Distribution
-        ("logistics", 9), ("supply chain", 10), ("cold chain logistics", 7), 
-        ("storage", 6), ("distribution efficiency", 7), ("traceability", 8), 
+        ("logistics", 9), ("supply chain", 10), ("cold chain logistics", 7),
+        ("storage", 6), ("distribution efficiency", 7), ("traceability", 8),
         ("supply chain visibility", 7), ("timeliness", 6),
         # Sales & Service
-        ("e-commerce", 8), ("online to offline", 7), ("O2O", 7), ("price analysis", 6), 
-        ("market analysis", 7), ("consumer behavior", 9), ("purchase intention", 8), 
+        ("e-commerce", 8), ("online to offline", 7), ("O2O", 7), ("price analysis", 6),
+        ("market analysis", 7), ("consumer behavior", 9), ("purchase intention", 8),
         ("brand loyalty", 7),
         # After-sales Service
-        ("after-sales service", 7), ("customer satisfaction", 8), ("complaint handling", 6), 
+        ("after-sales service", 7), ("customer satisfaction", 8), ("complaint handling", 6),
         ("customer feedback", 8), ("return policy", 5),
         # Sentiment Analysis
-        ("sentiment analysis", 10), ("consumer reviews", 10), ("opinion mining", 9), 
-        ("text mining", 8), ("natural language processing", 8), ("NLP", 8), 
-        ("machine learning", 7), ("deep learning", 7), ("BERT", 8), ("LSTM", 7), 
+        ("sentiment analysis", 10), ("consumer reviews", 10), ("opinion mining", 9),
+        ("text mining", 8), ("natural language processing", 8), ("NLP", 8),
+        ("machine learning", 7), ("deep learning", 7), ("BERT", 8), ("LSTM", 7),
         ("aspect-based sentiment analysis", 9)
     ]
 
@@ -216,7 +216,7 @@ def generate_tcm_search_queries():
     list: List of search queries
     """
     return [
-        '"traditional chinese medicine" AND "quality evaluation"', 
+        '"traditional chinese medicine" AND "quality evaluation"',
         '"herbal medicine" AND "quality control" AND "heavy metals"',
         '"TCM" AND "authenticity" AND "DNA barcoding"',
         '"chinese materia medica" AND "pesticide residue analysis"',
@@ -298,7 +298,7 @@ def generate_detailed_markdown(analyzed_papers, keywords, search_queries, timest
 def get_tcm_topic_categories():
     """
     Gets the categories for the TCM topic.
-    
+
     Returns:
         dict: A dictionary of category names and their associated keywords.
     """
@@ -324,14 +324,14 @@ def generate_categorized_references(analyzed_papers, timestamp):
     """
     categories = get_tcm_topic_categories()
     topic_name = "TCM Supply Chain and Consumer Review Analysis"
-    
+
     categorized_papers = {category: [] for category in categories}
-    
+
     for paper, score, keywords in analyzed_papers:
         title = paper.get('title', '').lower()
         snippet = paper.get('snippet', '').lower()
         text_to_check = title + ' ' + snippet
-        
+
         for category, cat_keywords in categories.items():
             if any(re.search(r'\b' + re.escape(kw.lower()) + r'\b', text_to_check) for kw in cat_keywords):
                 categorized_papers[category].append(paper)
@@ -339,14 +339,14 @@ def generate_categorized_references(analyzed_papers, timestamp):
 
     markdown = f"# Categorized References for {topic_name}\n\n"
     markdown += f"**Generated on:** {timestamp}\n\n"
-    
+
     for category, papers in categorized_papers.items():
         if papers:
             markdown += f"## {category}\n\n"
             for paper in papers:
                 markdown += f"- {format_reference(paper)}\n"
             markdown += "\n"
-            
+
 
 def main():
     # --- Argument Parsing ---
@@ -377,9 +377,9 @@ def main():
             break
 
         print(f"\n[{i}/{len(search_queries)}] Searching for: '{query}'")
-        
+
         results = search_google_scholar(query, num_results=args.per_query)
-        
+
         if results:
             new_papers_count = 0
             for paper in results:
@@ -439,7 +439,7 @@ def main():
     # Save raw data to JSON
     data_filename = f"{args.output_prefix}_data_{file_timestamp}.json"
     with open(data_filename, "w", encoding="utf-8") as f:
-        json.dump({ 
+        json.dump({
             "topic": "tcm",
             "topic_name": search_topic,
             "timestamp": formatted_timestamp,
@@ -461,7 +461,7 @@ def main():
             "keywords": keywords,
             "papers": [p[0] for p in analyzed_papers]
         }, f, indent=2, ensure_ascii=False)
-    
+
     print(f"\n=== Search Complete ===")
     print(f"- Detailed Results: {results_filename}")
     print(f"- References: {references_filename}")

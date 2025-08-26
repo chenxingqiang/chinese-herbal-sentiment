@@ -22,6 +22,12 @@ from torch.optim import AdamW
 import warnings
 warnings.filterwarnings('ignore')
 
+# 导入新的数据集加载器
+try:
+    from ..utils.dataset_loader import load_chinese_herbal_dataset
+except ImportError:
+    from chinese_herbal_sentiment.utils.dataset_loader import load_chinese_herbal_dataset
+
 # 设置中文显示
 plt.rcParams['font.sans-serif'] = ['Arial Unicode MS']  # 用于显示中文标签
 plt.rcParams['axes.unicode_minus'] = False  # 用于正常显示负号
@@ -490,22 +496,101 @@ class BERTSentimentAnalysis:
         results = self.evaluate_model(model, test_dataloader)
 
         return results
+    
+    def analyze_comments_from_huggingface(self, 
+                                         dataset_name="xingqiang/chinese-herbal-medicine-sentiment",
+                                         sample_size=None,
+                                         epochs=None,
+                                         batch_size=None,
+                                         cache_dir=None):
+        """从Hugging Face数据集分析评论数据"""
+        print(f"从Hugging Face数据集加载BERT训练数据: {dataset_name}")
+        
+        try:
+            # 加载数据集
+            loader = load_chinese_herbal_dataset(dataset_name, cache_dir)
+            
+            # 获取训练数据
+            comments, labels = loader.get_data_for_analysis(
+                split='train',
+                sample_size=sample_size,
+                balance_classes=True
+            )
+            
+            print(f"成功加载 {len(comments)} 条评论数据用于BERT训练")
+            
+            # 打印数据分布信息
+            unique_labels, counts = np.unique(labels, return_counts=True)
+            print("数据分布:")
+            for label, count in zip(unique_labels, counts):
+                sentiment_name = "正面" if label == 1 else ("负面" if label == -1 else "中性")
+                percentage = count / len(labels) * 100
+                print(f"  {sentiment_name}: {count} 条 ({percentage:.1f}%)")
+            
+            # 使用现有的分析方法
+            return self.analyze_comments_with_data(comments, labels, epochs, batch_size)
+            
+        except Exception as e:
+            print(f"❌ 从Hugging Face加载BERT数据失败: {str(e)}")
+            print("回退到本地文件分析...")
+            # 回退到原有的文件分析方法
+            return self.analyze_comments([], sample_size, epochs, batch_size)
 
 def main():
     # 创建BERT情感分析对象
     bert_analyzer = BERTSentimentAnalysis()
+    
+    print("=== BERT情感分析系统 ===")
+    print("选择数据源:")
+    print("1. 从Hugging Face数据集加载 (推荐)")
+    print("2. 从本地Excel文件加载")
+    
+    choice = input("请选择 (1/2): ").strip()
+    
+    if choice == "1":
+        print("\n使用Hugging Face数据集进行BERT训练...")
+        try:
+            # 从Hugging Face分析评论
+            results = bert_analyzer.analyze_comments_from_huggingface(
+                dataset_name="xingqiang/chinese-herbal-medicine-sentiment",
+                sample_size=10000,  # 可根据GPU内存调整
+                epochs=3,  # BERT训练轮次
+                batch_size=16
+            )
+            print("\n✓ BERT训练完成！结果已保存到 bert_training_stats.png")
+            print(f"✓ 使用了Hugging Face数据集: xingqiang/chinese-herbal-medicine-sentiment")
+        except Exception as e:
+            print(f"❌ Hugging Face数据集加载失败: {str(e)}")
+            print("回退到本地文件分析...")
+            choice = "2"  # 回退到本地文件
+    
+    if choice == "2":
+        print("\n使用本地Excel文件进行BERT训练...")
+        # 获取评论文件列表
+        comments_files = []
+        for category in ['好评', '中评', '差评']:
+            files = glob.glob(f"comments/*{category}*.xls") + glob.glob(f"comments/*{category}*.xlsx")
+            comments_files.extend(files)
 
-    # 获取评论文件列表
-    comments_files = []
-    for category in ['好评', '中评', '差评']:
-        files = glob.glob(f"comments/*{category}*.xls") + glob.glob(f"comments/*{category}*.xlsx")
-        comments_files.extend(files)
+        if not comments_files:
+            print("❌ 未找到本地数据文件，请确保comments目录下有Excel文件")
+            print("建议使用Hugging Face数据集 (选项1)")
+            return
 
-    # 分析评论（使用部分数据进行训练，避免内存不足）
-    sample_size = 10000  # 可以根据可用内存调整
-    results = bert_analyzer.analyze_comments(comments_files, sample_size)
-
-    print("\n分析完成！结果已保存到 bert_training_stats.png")
+        # 分析评论（使用部分数据进行训练，避免内存不足）
+        sample_size = 10000  # 可以根据可用内存调整
+        results = bert_analyzer.analyze_comments(comments_files, sample_size)
+        print("\n✓ BERT训练完成！结果已保存到 bert_training_stats.png")
+    
+    # 打印结果摘要
+    if 'results' in locals() and results:
+        print("\n=== BERT训练结果摘要 ===")
+        print(f"准确率: {results['accuracy']:.4f}")
+        print(f"精确率: {results['precision']:.4f}")
+        print(f"召回率: {results['recall']:.4f}")
+        print(f"F1值: {results['f1']:.4f}")
+    
+    print("\n感谢使用BERT情感分析系统！")
 
 if __name__ == "__main__":
     main()
